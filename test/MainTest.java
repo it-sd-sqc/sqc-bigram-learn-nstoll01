@@ -8,7 +8,7 @@ import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import edu.cvtc.bigram.*;
+import edu.cvtc.bigram.Main;
 
 @SuppressWarnings({"SpellCheckingInspection"})
 class MainTest {
@@ -60,5 +60,17 @@ class MainTest {
     );
   }
 
-  // TODO: Create your test(s) below. /////////////////////////////////////////
+  @Test
+  void compareIdsWithCapital() {
+    assertDoesNotThrow(
+      ()->{
+        Main.reset();
+        Connection db = Main.createConnection();
+
+        int id1 = Main.getId(db, "a");
+        int id2 = Main.getId(db, "A");
+        assertEquals(id1, id2);
+      }
+    );
+  }
 }
